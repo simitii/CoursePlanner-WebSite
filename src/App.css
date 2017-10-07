@@ -1,0 +1,133 @@
+.App {
+  height: 100%;
+  text-align: center;
+  font-family: 'Patrick Hand SC', cursive;
+}
+
+/* HEADER */
+.App-header {
+  height: 100px;
+  background-color: #222;
+  padding: 2px;
+  color: #e7e7e7;
+  font-family: 'Patrick Hand SC', cursive;
+}
+.header-main {
+  padding: 0px;
+  margin: 0px;
+}
+.header-text {
+  padding: 0px;
+  margin: 0px;
+}
+/* HEADER-END */
+
+/* CONTENT */
+.App-content {
+  height: 100%;
+
+}
+
+/* CourseSelection */
+.course-search {
+  margin: 8px;
+  width: calc(100%-16px);
+  max-height: 200px;
+  background-color: #64B5F6;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 8px;
+}
+.search-results {
+  max-height: 130px;
+  overflow: auto;
+}
+
+.search-input {
+  margin: 8px;
+  width: 50%;
+}
+
+.search-loading {
+  height: 40px;
+  width: 40px;
+  z-index: 999;
+  align-self: center;
+}
+
+.course-list {
+  max-height: 200px;
+  margin: 8px;
+  width: calc(100%-16px);
+  background-color: #E1BEE7;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 8px;
+}
+.add-table-scroll {
+  max-height: 130px;
+  overflow: auto;
+}
+/* CourseSelection */
+
+/* Schedule */
+.Schedule {
+  margin: 8px;
+  width: calc(100%-16px);
+  background-color: #80DEEA;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 8px;
+  margin-bottom: 30px;
+}
+.schedule-table{
+  align-self: center;
+  width: calc(100% - 16px);
+  margin: 8px;
+  box-sizing: border-box;
+  border: 1px solid black;
+}
+.table-row{
+  border: 1px solid black;
+}
+.table-description-row .column-even{
+  background-color: #d7d7d7;
+}
+.table-description-row .column-odd{
+  background-color: #f3f3f3
+}
+
+.table-row-even .column-even{
+  background-color: #e0e0e0;
+}
+.table-row-even .column-odd{
+  background-color: #d7d7d7;
+}
+.table-row-odd .column-even{
+  background-color: #f3f3f3;
+}
+.table-row-odd .column-odd{
+  background-color: #fbfbfb;
+}
+
+/* Schedule-End */
+
+/* CONTENT END */
+
+
+/* FOOTER */
+.App-footer {
+  position:fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #222;
+  padding: 2px;
+  color: #e7e7e7;
+  font-family: 'Patrick Hand SC', cursive;
+}
+
+.footer-text {
+  padding: 0px;
+  margin: 0px;
+}
+/* FOOTER-END */
