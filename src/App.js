@@ -3,6 +3,8 @@ import './App.css';
 
 import Fetch from './Fetch.js';
 
+import loading_apple from './images/loading_apple.gif';
+
 const initialYear = 2017;
 const WRONG_INPUT = (
               <tr>
@@ -24,7 +26,7 @@ const INITIAL_ADD_BOX = (
 
 const SCHEDULE_DATA = new Map();
 const ADDED_COURSES = new Map();
-const AVAILABLE_COURSES = new Map();
+let AVAILABLE_COURSES = new Map();
 const AVAILABLE_DEPARTMENTS = new Map();
 const ADDED_DEPARTMENTS = new Map();
 const REQUESTED_DEPARTMENTS = new Map();
@@ -57,11 +59,15 @@ class App extends Component {
   getDepartments(){
     return Fetch("/getDepartments","GET")
       .then((departments) => {
-        departments.forEach((dep)=>{
+        departments.forEach((dep,index)=>{
+          dep.id = index;
           if(!AVAILABLE_DEPARTMENTS.has(dep.short)){
-            AVAILABLE_DEPARTMENTS.set(dep.short,dep);
+            let array = [dep];
+            AVAILABLE_DEPARTMENTS.set(dep.short,array);
           }else{
-            //console.log('department is already in the map!',dep.short);
+            let array = AVAILABLE_DEPARTMENTS.get(dep.short);
+            array.push(dep);
+            AVAILABLE_DEPARTMENTS.set(dep.short,array);
           }
         });
       })
@@ -73,7 +79,7 @@ class App extends Component {
         reject("already added!");
       });
     }
-    const request = REQUESTED_DEPARTMENTS.get(department.short);
+    const request = REQUESTED_DEPARTMENTS.get(department.short + department.id);
     if(request!==undefined && (Date.now()-request.date) < 10000){
       return new Promise((resolve,reject) => {
         reject("already requested!");
@@ -96,9 +102,10 @@ class App extends Component {
               //console.log('course is already in the map!',course.code);
             }
           });
+          AVAILABLE_COURSES = new Map([...AVAILABLE_COURSES.entries()].sort());
         })
         .catch((e) => console.log(e));
-        REQUESTED_DEPARTMENTS.set(department.short,{
+        REQUESTED_DEPARTMENTS.set(department.short+department.id,{
           promise: promise,
           date: Date.now()
         });
@@ -118,7 +125,10 @@ class App extends Component {
     const result = [];
     AVAILABLE_DEPARTMENTS.forEach((value,key) => {
       if(key.includes(text)){
-        result.push(value);
+        //value => department array
+        value.forEach(function(dep){
+          result.push(dep);
+        });
       }
     });
     return result;
@@ -240,9 +250,13 @@ class App extends Component {
         }else{
           if(!ADDED_DEPARTMENTS.has(department)){
             this.setState({loading:true});
-            this.addDepartment(dep)
-              .then(() => this.setState({loading:false}))
-              .catch((e) => console.log(e));
+            let context = this;
+            dep.forEach(function(depItem){
+              console.log(depItem);
+              context.addDepartment(depItem)
+                .then(() => context.setState({loading:false}))
+                .catch((e) => console.log(e));
+            });
           }else{
             console.log("dep", courses);
             let i = 0;
@@ -378,7 +392,7 @@ class App extends Component {
         <div className="App-header">
           <h3 className="header-main">BOUN Course Planner</h3>
           <h5 className="header-text">Always uses latest Registration Data</h5>
-          <p className="header-text">Notes: 1)Lab hours are not included. 2)In order to use courses which has different code, you should first search for the department. (Example: ENG493 is under CMPE. So you first need to search for CMPE and then search for ENG)</p>
+          <p className="header-text">Notes: Lab and PS hours are not included.</p>
         </div>
         <div className="App-content">
           <div className="Selection">
@@ -393,7 +407,7 @@ class App extends Component {
                 <div className="search-results">
                   {
                     this.state.loading?
-                    <img src={"https://www.wallies.com/filebin/images/loading_apple.gif"} className="search-loading"></img>
+                    <img src={loading_apple} className="search-loading"></img>
                     :
                     (
                   <table className="schedule-table">

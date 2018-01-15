@@ -1,7 +1,9 @@
-const API = "http://www.bouncourseplanner.com/api";
+const API = window.location.href + 'api';
+//const API = "http://localhost:8080/api";
 
 const Fetch = (path,method,json) => {
   console.log(API+path);
+  console.log(json);
   return new Promise(async function(resolve,reject) {
     let gotResponse = false;
     try {

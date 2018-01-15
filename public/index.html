@@ -2,7 +2,6 @@
 <html lang="en">
   <head prefix="og: http://ogp.me/ns#">
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
 
     <title>BOUN Course Planner</title>
@@ -16,6 +15,13 @@
     <meta property="og:locale" content="en_US" />
     <meta property="og:image" content="http://www.bouncourseplanner.com/ico/android-icon-192x192.png">
 
+    <style>
+      body{
+        min-width:960px;        /* Suppose you want minimum width of 960px */
+        width: auto !important;  /* Firefox will set width as auto */
+        width:960px;            /* As IE6 ignores !important it will set width as 960px; */
+      }
+    </style>
 
     <!--
       manifest.json provides metadata used when your web app is added to the
@@ -62,7 +68,6 @@
       ga('create', 'UA-101617296-2', 'auto');
       ga('send', 'pageview');
     </script>
-
 
   </head>
   <body>
