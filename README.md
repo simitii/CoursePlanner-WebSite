@@ -5,6 +5,10 @@ an up-to-date Course Planner for Bogazici University Students
 
 Stack: React,HTML,CSS and NodeJS
 
+**Front-end:** https://github.com/simitii/CoursePlanner-WebSite
+
+**Back-end:** https://github.com/simitii/CoursePlanner-BackEnd
+
 # Explanation
 Instead of keeping a database of courses, this project aims to get **lastest data** from the original source(Boun Registration Web Site) whenever a user needs course information since course informations are updated frequently.
 
